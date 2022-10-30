@@ -3,7 +3,7 @@ local gui = lib.CreateLib("Sharkbait", "Sentinel")
 local main = gui:NewTab("SharkBait")
 local section = main:NewSection("main")
 local plr = game.Players.LocalPlayer
-local hitreg = game.ReplicatedStorage.Projectiles.Events.Weapons.HitScanHitReg
+local hitreg = game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitRegA") or game.ReplicatedStorage.Projectiles.Events.Weapons.HitScanHitReg
 
 section:NewButton("kill shark", "Instantly kills the shark", function()
     if #plr.Backpack:GetChildren() ~= 0 then
@@ -52,6 +52,9 @@ section:NewToggle("auto inv all", "invites everyone lol", function(state)
 end)
 
 section:NewButton("anti-afk", "(skidded)", function()
+    while task.wait(1) do 
+        game:GetService("ReplicatedStorage").EventsFolder.GameLoop.ToggleSpectator:InvokeServer(false)
+    end
     local vu = game:GetService("VirtualUser")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
         vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -59,4 +62,3 @@ section:NewButton("anti-afk", "(skidded)", function()
         vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     end)
 end)
-
