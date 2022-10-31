@@ -3,7 +3,15 @@ local gui = lib.CreateLib("Sharkbait", "Sentinel")
 local main = gui:NewTab("SharkBait")
 local section = main:NewSection("main")
 local plr = game.Players.LocalPlayer
-local hitreg = game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitRegA") or game.ReplicatedStorage.Projectiles.Events.Weapons.HitScanHitReg
+local abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+local hitreg = nil
+
+for i = #abc,1,-1 do
+	if game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitReg"..string.sub(abc,i,i)) then
+		hitreg = game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitReg"..string.sub(abc,i,i))
+		break
+	end
+end
 
 section:NewButton("kill shark", "Instantly kills the shark", function()
     if #plr.Backpack:GetChildren() ~= 0 then
