@@ -5,7 +5,7 @@ local section = main:NewSection("main")
 local plr = game.Players.LocalPlayer
 local abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 local hitreg = nil
-
+if not getgenv().success then game.Players.LocalPlayer:Kick("Please do not crack the script") end
 for i = #abc,1,-1 do
 	if game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitReg"..string.sub(abc,i,i)) then
 		hitreg = game.ReplicatedStorage.Projectiles.Events.Weapons:FindFirstChild("HitScanHitReg"..string.sub(abc,i,i))
